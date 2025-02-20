@@ -1,17 +1,26 @@
 import { plantList } from '../datas/plantList'
 
 function ShoppingList() {
-	let categories = []
-	plantList.forEach(plant => {
-		if(!categories.includes(plant.category)){
-			categories.push(plant.category)
-		}		
-	});
-	return (<ul>
-		{categories.map((category, index) => (
-			<li key={index}> {category} </li>
-		))}
-	</ul>)
+	const categories = plantList.reduce(
+		(acc, plant) =>
+			acc.includes(plant.category) ? acc : acc.concat(plant.category),
+		[]
+	)
+
+	return (
+		<div>
+			<ul>
+				{categories.map((cat) => (
+					<li key={cat}>{cat}</li>
+				))}
+			</ul>
+			<ul>
+				{plantList.map((plant) => (
+					<li key={plant.id}>{plant.name}</li>
+				))}
+			</ul>
+		</div>
+	)
 }
 
 
