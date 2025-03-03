@@ -1,10 +1,11 @@
+import { useState } from 'react'
 import { plantList } from '../datas/plantList'
 import PlantItem from './PlantItem'
-import '../styles/ShoppingList.css'
 import Categories from './Categories'
-import { useState } from 'react'
+import '../styles/ShoppingList.css'
 
 function ShoppingList({ cart, updateCart }) {
+	const [activeCategory, setActiveCategory] = useState('')
 	const categories = plantList.reduce(
 		(acc, plant) =>
 			acc.includes(plant.category) ? acc : acc.concat(plant.category),
@@ -32,13 +33,13 @@ function ShoppingList({ cart, updateCart }) {
 		<div className='lmj-shopping-list'>
 			<Categories
 				categories={categories}
-				updateSelectedCategory={updateSelectedCategory}
-				activeCategory={selectedCategory}
+				setActiveCategory={setActiveCategory}
+				activeCategory={activeCategory}
 			/>
 
 			<ul className='lmj-plant-list'>
 				{plantList.map(({ id, cover, name, water, light, price, category }) =>
-					!selectedCategory || selectedCategory === category ? (
+					!activeCategory || activeCategory === category ? (
 						<div key={id}>
 							<PlantItem
 								cover={cover}

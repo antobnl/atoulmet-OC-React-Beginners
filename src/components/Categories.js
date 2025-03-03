@@ -1,19 +1,23 @@
-function Categories({selectedCategory, updateSelectedCategory, categories}) {
+import '../styles/Categories.css'
 
-    return (
-        <div>
-        <select value={selectedCategory}
-				onChange={(e) => updateSelectedCategory(e.target.value)}>
-            <option value="">Filtrer par catégorie</option>
-            {categories.map((cat) => (
+function Categories({ setActiveCategory, categories, activeCategory }) {
+	return (
+		<div className='lmj-categories'>
+			<select
+				value={activeCategory}
+				onChange={(e) => setActiveCategory(e.target.value)}
+				className='lmj-categories-select'
+			>
+				<option value=''>---</option>
+				{categories.map((cat) => (
 					<option key={cat} value={cat}>
 						{cat}
 					</option>
 				))}
-        </select>
-        <button onClick={() => updateSelectedCategory('')}>Réinitialiser</button>
-        </div>
-    )
+			</select>
+			<button onClick={() => setActiveCategory('')}>Réinitialiser</button>
+		</div>
+	)
 }
 
 export default Categories
