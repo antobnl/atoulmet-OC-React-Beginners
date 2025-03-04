@@ -12,8 +12,6 @@ function ShoppingList({ cart, updateCart }) {
 		[]
 	)
 
-	const [selectedCategory, updateSelectedCategory] = useState('')
-
 	function addToCart(name, price) {
 		const currentPlantSaved = cart.find((plant) => plant.name === name)
 		if (currentPlantSaved) {
